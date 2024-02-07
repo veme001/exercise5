@@ -7,8 +7,10 @@ import { Point } from "ol/geom";
 import React, { useState } from "react";
 
 import { useLayer } from "../map/useLayer";
+import { FeatureLike } from "ol/Feature";
 
 const powerPlantLayer = new VectorLayer({
+  className: "kraftverk",
   source: new VectorSource({
     url: "kraftverk.json",
     format: new GeoJSON(),
@@ -17,21 +19,25 @@ const powerPlantLayer = new VectorLayer({
 });
 
 interface powerPlantProperties {
+  vannkraf_2: string;
   vannkraf_3: string;
+  maksytelse: number;
 }
 
 type powerPlantFeature = {
   getProperties(): powerPlantProperties;
 } & Feature<Point>;
 
-function powerPlantStyle() {
+function powerPlantStyle(f: FeatureLike) {
+  const feature = f as powerPlantFeature;
+  const powerPlant = feature.getProperties();
   return new Style({
     image: new Circle({
       stroke: new Stroke({ color: "white", width: 1 }),
       fill: new Fill({
-        color: "blue",
+        color: powerPlant.vannkraf_2 === "Mini" ? "red" : "blue",
       }),
-      radius: 3,
+      radius: 3 + powerPlant.maksytelse * 4,
     }),
   });
 }

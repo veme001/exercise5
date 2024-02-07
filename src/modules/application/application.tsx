@@ -7,6 +7,7 @@ import "ol/ol.css";
 import { map, MapContext } from "../map/mapContext";
 import { Layer } from "ol/layer";
 import { PowerPlantLayerCheckBox } from "../powerPlants/PowerPlantLayerCheckBox";
+import { PowerPlantAside } from "../powerPlants/PowerplantAside";
 
 export function Application() {
   function handleFocusUser(e: React.MouseEvent) {
@@ -40,6 +41,7 @@ export function Application() {
       </nav>
       <main>
         <div ref={mapRef}></div>
+        <PowerPlantAside />
       </main>
     </MapContext.Provider>
   );
