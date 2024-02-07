@@ -6,6 +6,7 @@ import "./application.css";
 import "ol/ol.css";
 import { map, MapContext } from "../map/mapContext";
 import { Layer } from "ol/layer";
+import { PowerPlantLayerCheckBox } from "../powerPlants/PowerPlantLayerCheckBox";
 
 export function Application() {
   function handleFocusUser(e: React.MouseEvent) {
@@ -29,12 +30,13 @@ export function Application() {
   return (
     <MapContext.Provider value={{ map, layers, setLayers }}>
       <header>
-        <h1>Kommune kart</h1>
+        <h1>Power Plants</h1>
       </header>
       <nav>
         <a href={"#"} onClick={handleFocusUser}>
           Focus on me
         </a>
+        <PowerPlantLayerCheckBox />
       </nav>
       <main>
         <div ref={mapRef}></div>
